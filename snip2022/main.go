@@ -7,6 +7,14 @@ import (
 
 // 定义一个 home handler 函数，"Hello from Snippetbox" 作为响应体
 func home(w http.ResponseWriter, r *http.Request) {
+	// 检查当前请求的 URL 路径是不是匹配 "/"。如果不匹配，使用
+	// http.NotFound() 函数发送 404 响应给客户端
+	// 重要地，我们从 handler 返回。如果我们不从 handler 返回，它将继续执行
+	// 并返回 "Hello from Snippetbox" 消息。
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
 	w.Write([]byte("Hello from Snippetbox"))
 }
 

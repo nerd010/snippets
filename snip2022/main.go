@@ -32,7 +32,7 @@ func snippetCreate(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", "POST")
 		// 使用 http.Error() 函数发送 405 状态码和 "Method Not Allowed"
 		// 字符串作为响应体。
-		http.Error(w, "Method Not Allowed", 405)
+		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		return
 	}
 

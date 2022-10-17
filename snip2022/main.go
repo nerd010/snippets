@@ -30,11 +30,9 @@ func snippetCreate(w http.ResponseWriter, r *http.Request) {
 		// 使用 Header().Set() 方法添加一个 'Allow: POST' 头到响应头中。
 		// 第一个参数是 header name，第二个参数是 header value.
 		w.Header().Set("Allow", "POST")
-		// 如果不是，使用 w.WriteHeader() 方法发送一个 405 的状态码
-		// 并且使用 w.Write() 方法写一个响应体内容为 "Method Not Allowed"
-		// 后续的代码不会被执行。
-		w.WriteHeader(405)
-		w.Write([]byte("Method Not Allowed"))
+		// 使用 http.Error() 函数发送 405 状态码和 "Method Not Allowed"
+		// 字符串作为响应体。
+		http.Error(w, "Method Not Allowed", 405)
 		return
 	}
 

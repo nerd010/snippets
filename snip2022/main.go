@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 // 定义一个 home handler 函数，"Hello from Snippetbox" 作为响应体
@@ -20,7 +22,18 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 // 添加一个 snippetView handler 函数
 func snippetView(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Display a specific snippet..."))
+	// 从 query string 中提取参数 id 的值
+	// 再将它通过 strconv.Atoi() 函数转换成 Int 类型。
+	// 如果它不能被转换或者转换后的值小于 1，我们就返回 404 页面，不能响应。
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	if err != nil || id < 1 {
+		http.NotFound(w, r)
+		return
+	}
+
+	// 使用 fmt.Fprintf() 函数将 id 的插入到我们的响应体中
+	// 并写到 http.ResponseWriter
+	fmt.Fprintf(w, "Display a specific snippet with ID %d...", id)
 }
 
 // 添加一个 snippetCreate handler 函数

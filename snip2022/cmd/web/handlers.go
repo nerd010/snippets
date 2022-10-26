@@ -17,7 +17,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 	// 初始化一个包含两个文件的切片。
 	// 注意：包含 base template 的必须是切片中的第一个元素
 	files := []string{
-		"./ui/html/base.tmpl",
+		"./ui/html/pages/base.tmpl",
 		"./ui/html/pages/home.tmpl",
 	}
 

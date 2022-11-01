@@ -18,6 +18,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 	// 注意：包含 base template 的必须是切片中的第一个元素
 	files := []string{
 		"./ui/html/pages/base.tmpl",
+		"./ui/html/partials/nav.tmpl",
 		"./ui/html/pages/home.tmpl",
 	}
 
